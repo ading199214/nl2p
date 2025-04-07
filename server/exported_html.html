@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6ecf0;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #1da1f2;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .sidebar, .feed, .widgets {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+        }
+        .sidebar, .widgets {
+            width: 200px;
+        }
+        .feed {
+            width: 600px;
+            border-radius: 8px;
+        }
+        .tweet {
+            border-bottom: 1px solid #e6ecf0;
+            padding: 10px 0;
+        }
+        .tweet textarea {
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .tweet button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .tweets {
+            list-style-type: none;
+            padding: 0;
+        }
+        .tweets li {
+            padding: 10px;
+            border-bottom: 1px solid #e6ecf0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Twitter Clone</h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h3>Menu</h3>
+            <ul>
+                <li>Home</li>
+                <li>Explore</li>
+                <li>Notifications</li>
+                <li>Messages</li>
+            </ul>
+        </div>
+        <div class="feed">
+            <div class="tweet">
+                <textarea id="tweetInput" placeholder="What's happening?"></textarea>
+                <button id="tweetButton">Tweet</button>
+            </div>
+            <ul class="tweets" id="tweetList"></ul>
+        </div>
+        <div class="widgets">
+            <h3>Trends</h3>
+            <ul>
+                <li>#JavaScript</li>
+                <li>#CSS</li>
+                <li>#HTML</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById('tweetButton').addEventListener('click', function() {
+            var tweetText = document.getElementById('tweetInput').value;
+            if (tweetText.trim() !== '') {
+                var tweetList = document.getElementById('tweetList');
+                var newTweet = document.createElement('li');
+                newTweet.textContent = tweetText;
+                tweetList.prepend(newTweet);
+                document.getElementById('tweetInput').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
