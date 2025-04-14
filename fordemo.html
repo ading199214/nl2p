@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Fragrance System</title>
+  <!-- Embedded CSS from styles.css -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    .center-title {
+      text-align: center;
+      font-size: 29px;
+      color: white;
+      line-height: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body {
+      background-color: #e9ebee;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      height: 100%;
+      padding: 20px 40px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 40px;
+      background-color: #46af28;
+      border-radius: 0;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      margin-left: -40px;
+      margin-right: -40px;
+      margin-top: -20px;
+      padding-left: 40px;
+      padding-right: 40px;
+      width: calc(100% + 80px);
+      position: relative;
+      height: 90px;
+      box-sizing: border-box;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+    header .logo img {
+      width: 120px;
+      margin-right: 20px;
+    }
+    header .logo1 img {
+      width: 90px;
+      margin-right: 20px;
+    }
+    header h1 {
+      flex-grow: 1;
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+    }
+    header button {
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: 20px;
+    }
+    .lang-btn {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: white;
+      color: #46af28;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      min-width: 80px;
+      text-align: center;
+    }
+    .lang-btn:hover {
+      background-color: #f0f0f0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .main-content {
+      display: flex;
+      justify-content: space-between;
+      height: calc(100% - 80px);
+      padding-top: 50px;
+      gap: 40px;
+      position: relative;
+    }
+    .main-content::before {
+      content: '';
+      position: absolute;
+      left: 45%;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background-color: #e0e0e0;
+      border-radius: 1px;
+    }
+    .buttons-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 90px;
+      margin: 0 auto;
+      width: 45%;
+      padding-right: 40px;
+      grid-auto-rows: min-content;
+    }
+    .buttons-section h3 {
+      font-size: 24px;
+      margin-top: 0;
+      grid-column: 1 / -1;
+      height: 30px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: -100px;
+    }
+    .control-section {
+      display: flex;
+      width: 55%;
+      gap: 20px;
+      align-items: flex-start;
+      margin-top: 0;
+      padding-left: 40px;
+    }
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px -40px;
+      padding: 0 40px;
+    }
+    .left-button {
+      flex-grow: 0;
+    }
+    .l-button {
+      background-color: #46af28;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .right-buttons {
+      display: flex;
+      gap: 20px;
+    }
+    .r-button {
+      background-color: #46af28;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .buttons-section button {
+      background-color: #e0e0e0;
+      border: none;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 19px;
+      cursor: pointer;
+      width: 90%;
+    }
+    .buttons-section button:hover {
+      background-color: #cccccc;
+    }
+    .scent-levels-section {
+      width: 120px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      padding-right: 20px;
+    }
+    .scent-levels-section h3 {
+      margin-bottom: 40px;
+      font-size: 24px;
+      color: #333;
+      height: 30px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 0;
+    }
+    .scent-level-item {
+      width: 100%;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      height: 52px;
+    }
+    .progress-container {
+      flex-grow: 1;
+      height: 20px;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-right: 10px;
+    }
+    .progress-bar {
+      height: 100%;
+      background-color: #46af28;
+      border-radius: 10px;
+      transition: width 0.3s ease-in-out;
+    }
+    .level-display {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      min-width: 45px;
+      text-align: right;
+    }
+    .level-high .progress-bar {
+      background-color: #46af28;
+    }
+    .level-medium .progress-bar {
+      background-color: #ffaa00;
+    }
+    .level-low .progress-bar {
+      background-color: #ff4d4d;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+    .sliders-section {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 0;
+      padding-left: 20px;
+    }
+    .sliders-section h3 {
+      margin-bottom: 25px;
+      font-size: 24px;
+      color: #333;
+      height: 30px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 0;
+      padding-left: 10px;
+    }
+    .slider-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 52px;
+      margin: 0;
+    }
+    .slider-item button {
+      background-color: #46af28;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 19px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 120px;
+      text-align: center;
+    }
+    .slider-item input[type="range"] {
+      flex-grow: 1;
+    }
+    .slider-item output {
+      min-width: 40px;
+      text-align: right;
+      font-size: 16px;
+    }
+    #result {
+      font-size: 20px;
+    }
+    .admin-controls {
+      background-color: #f8f9fa;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .admin-header h2 {
+      margin: 0;
+      color: #333;
+      font-size: 24px;
+    }
+    .admin-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    .admin-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      color: white;
+    }
+    #auto-update-toggle {
+      background-color: #ff4444;
+    }
+    #auto-update-toggle:hover {
+      background-color: #ff6666;
+    }
+    .admin-buttons button:last-child {
+      background-color: #46af28;
+    }
+    .admin-buttons button:last-child:hover {
+      background-color: #46af28;
+    }
+    .admin-settings {
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .settings-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .settings-row label {
+      flex: 0 0 200px;
+      font-size: 16px;
+      color: #333;
+    }
+    .settings-row input {
+      width: 120px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .settings-info {
+      margin-left: 15px;
+      color: #666;
+      font-size: 14px;
+      font-style: italic;
+    }
+    .settings-save-btn {
+      background-color: #46af28;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    .settings-save-btn:hover {
+      background-color: #46af28;
+    }
+    .admin-instructions {
+      color: #666;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .level-display[style*="cursor: pointer"]:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- HTML content from index.html -->
+  <div class="container">
+    <header>
+      <h1 class="center-title">数字香氛系统</h1>
+      <img id="customer-logo" style="display: none;" alt="Customer Logo">
+      <button id="language-switch" class="lang-btn">English</button>
+    </header>
+    <div class="buttons-container">
+      <div class="left-button">
+        <button class="l-button" onclick="connectToDevice()">连接设备</button>
+      </div>
+      <div class="right-buttons">
+        <button class="r-button" onclick="stopScent()">停香</button>
+        <button class="r-button" onclick="getScentValues()">试香</button>
+        <button class="r-button" onclick="saveCurrentConfig()">保存</button>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="buttons-section">
+        <h3>我的香氛</h3>
+        <button onclick="">自定义1</button>
+        <button onclick="">自定义2</button>
+        <button onclick="">自定义3</button>
+        <button onclick="">自定义4</button>
+        <button onclick="">自定义5</button>
+        <button onclick="">自定义6</button>
+        <button onclick="">自定义7</button>
+        <button onclick="">自定义8</button>
+        <button onclick="">自定义9</button>
+      </div>
+      <div class="control-section">
+        <div class="scent-levels-section">
+          <h3>香料余量</h3>
+          <div class="scent-level-item">
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="level-display">100%</div>
+          </div>
+          <div class="scent-level-item">
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="level-display">100%</div>
+          </div>
+          <div class="scent-level-item">
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="level-display">100%</div>
+          </div>
+          <div class="scent-level-item">
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="level-display">100%</div>
+          </div>
+          <div class="scent-level-item">
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="level-display">100%</div>
+          </div>
+          <div class="scent-level-item">
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="level-display">100%</div>
+          </div>
+        </div>
+        <div class="sliders-section">
+          <h3>基础香型</h3>
+          <div class="slider-item">
+            <button onclick="startScent(1)">花香调</button>
+            <input id="slider1" type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.textContent = this.value">
+            <span>0</span>
+          </div>
+          <div class="slider-item">
+            <button onclick="startScent(2)">果香调</button>
+            <input id="slider2" type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.textContent = this.value">
+            <span>0</span>
+          </div>
+          <div class="slider-item">
+            <button onclick="startScent(3)">绿叶香</button>
+            <input id="slider3" type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.textContent = this.value">
+            <span>0</span>
+          </div>
+          <div class="slider-item">
+            <button onclick="startScent(4)">馥香调</button>
+            <input id="slider4" type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.textContent = this.value">
+            <span>0</span>
+          </div>
+          <div class="slider-item">
+            <button onclick="startScent(5)">水生调</button>
+            <input id="slider5" type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.textContent = this.value">
+            <span>0</span>
+          </div>
+          <div class="slider-item">
+            <button onclick="startScent(6)">木质调</button>
+            <input id="slider6" type="range" min="0" max="10" value="0" oninput="this.nextElementSibling.textContent = this.value">
+            <span>0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="result"></div>
+  <footer class="footer">
+    <img src="logos/greenlogo.png" alt="Green Logo" class="footer-logo">
+  </footer>
+  
+  <!-- Embedded JavaScript from script.js -->
+  <script>
+    let device;
+    let writeCharacteristic;
+    let notifyCharacteristic;
+
+    const serviceUUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+    const writeCharacteristicUUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+    const notifyCharacteristicUUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+
+    const sourceAddress = '00 00';
+    const targetAddress = '00 01';
+
+    let activeScent = null;
+    let keepAliveTimer = null;
+    const KEEP_ALIVE_INTERVAL = 25000;
+    let isCustomButtonActive = false;
+    let customCommandMode = 'multi';
+    let currentSequentialIndex = 0;
+    let lastCommandTime = 0;
+    let isWaitingForCompletion = false;
+
+    const translations = {
+      'en': {
+        'title': 'Digital Fragrance System',
+        'connect': 'Connect',
+        'stop': 'Stop',
+        'test': 'Test',
+        'save': 'Save',
+        'custom': 'Custom',
+        'scentLevels': 'Remaining',
+        'basicTypes': 'Base Scents',
+        'myFragrances': 'My Fragrances',
+        'floral': 'Floral',
+        'fruity': 'Fruity',
+        'green': 'Green',
+        'rich': 'Acromatics',
+        'aquatic': 'Aquatic',
+        'woody': 'Woody',
+        'adminPanel': 'Admin Panel',
+        'pauseAutoUpdate': 'Pause Auto Update',
+        'startAutoUpdate': 'Start Auto Update',
+        'resetAll': 'Reset All Scents',
+        'updateInterval': 'Update Interval (minutes):',
+        'updateInfo': 'Each update decreases by 1%',
+        'saveSettings': 'Save Settings',
+        'clickInstructions': 'Click on percentage numbers to manually modify scent levels'
+      },
+      'zh': {
+        'title': '数字香氛系统',
+        'connect': '连接设备',
+        'stop': '停香',
+        'test': '试香',
+        'save': '保存',
+        'custom': '自定义',
+        'scentLevels': '香料余量',
+        'basicTypes': '基础香型',
+        'myFragrances': '我的香氛',
+        'floral': '花香调',
+        'fruity': '果香调',
+        'green': '绿叶香',
+        'rich': '馥香调',
+        'aquatic': '水生调',
+        'woody': '木质调',
+        'adminPanel': '管理员控制面板',
+        'pauseAutoUpdate': '暂停自动更新',
+        'startAutoUpdate': '开启自动更新',
+        'resetAll': '重置所有香料',
+        'updateInterval': '更新间隔 (分钟):',
+        'updateInfo': '每次更新减少1%',
+        'saveSettings': '保存设置',
+        'clickInstructions': '点击百分比数字可以手动修改香料余量'
+      }
+    };
+
+    let currentLang = 'zh';
+
+    function updateLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('language', lang);
+      const langButton = document.getElementById('language-switch');
+      langButton.textContent = lang === 'zh' ? 'English' : '中文';
+      document.querySelector('title').textContent = translations[lang]['title'];
+      document.querySelector('.center-title').textContent = translations[lang]['title'];
+      document.querySelector('.l-button').textContent = translations[lang]['connect'];
+      const rightButtons = document.querySelectorAll('.r-button');
+      rightButtons[0].textContent = translations[lang]['stop'];
+      rightButtons[1].textContent = translations[lang]['test'];
+      rightButtons[2].textContent = translations[lang]['save'];
+      const customButtons = document.querySelectorAll('.buttons-section button');
+      customButtons.forEach((button, index) => {
+        if (button.textContent.includes('自定义') || button.textContent.includes('Custom')) {
+          button.textContent = `${translations[lang]['custom']}${index + 1}`;
+        }
+      });
+      document.querySelector('.scent-levels-section h3').textContent = translations[lang]['scentLevels'];
+      document.querySelector('.sliders-section h3').textContent = translations[lang]['basicTypes'];
+      document.querySelector('.buttons-section h3').textContent = translations[lang]['myFragrances'];
+      const sliderButtons = document.querySelectorAll('.slider-item button');
+      sliderButtons[0].textContent = translations[lang]['floral'];
+      sliderButtons[1].textContent = translations[lang]['fruity'];
+      sliderButtons[2].textContent = translations[lang]['green'];
+      sliderButtons[3].textContent = translations[lang]['rich'];
+      sliderButtons[4].textContent = translations[lang]['aquatic'];
+      sliderButtons[5].textContent = translations[lang]['woody'];
+      if (isAdmin) {
+        const adminHeader = document.querySelector('.admin-header h2');
+        if (adminHeader) adminHeader.textContent = translations[lang]['adminPanel'];
+        const autoUpdateToggle = document.getElementById('auto-update-toggle');
+        if (autoUpdateToggle) {
+          autoUpdateToggle.textContent = autoUpdateEnabled ?
+            translations[lang]['pauseAutoUpdate'] :
+            translations[lang]['startAutoUpdate'];
+        }
+        const resetButton = document.querySelector('.admin-buttons button:last-child');
+        if (resetButton) resetButton.textContent = translations[lang]['resetAll'];
+        const updateIntervalLabel = document.querySelector('.settings-row label');
+        if (updateIntervalLabel) updateIntervalLabel.textContent = translations[lang]['updateInterval'];
+        const settingsInfo = document.querySelector('.settings-info');
+        if (settingsInfo) settingsInfo.textContent = translations[lang]['updateInfo'];
+        const saveSettingsBtn = document.querySelector('.settings-save-btn');
+        if (saveSettingsBtn) saveSettingsBtn.textContent = translations[lang]['saveSettings'];
+        const adminInstructions = document.querySelector('.admin-instructions');
+        if (adminInstructions) adminInstructions.textContent = translations[lang]['clickInstructions'];
+      }
+    }
+
+    function initLanguage() {
+      const savedLang = localStorage.getItem('language');
+      if (savedLang) {
+        currentLang = savedLang;
+      }
+      const langButton = document.getElementById('language-switch');
+      if (langButton) {
+        langButton.textContent = currentLang === 'zh' ? 'English' : '中文';
+        langButton.addEventListener('click', () => {
+          const newLang = currentLang === 'zh' ? 'en' : 'zh';
+          updateLanguage(newLang);
+        });
+      }
+      updateLanguage(currentLang);
+    }
+
+    async function connectToDevice() {
+      try {
+        document.getElementById('result').innerText = "Requesting Bluetooth Device...";
+        device = await navigator.bluetooth.requestDevice({
+          filters: [
+            { namePrefix: 'scent' },
+            { services: [serviceUUID] }
+          ],
+          optionalServices: [serviceUUID]
+        });
+        document.getElementById('result').innerText = `Selected device: ${device.name}. Connecting...`;
+        const server = await device.gatt.connect();
+        document.getElementById('result').innerText = `Connected to GATT server: ${device.name}`;
+        const service = await server.getPrimaryService(serviceUUID);
+        writeCharacteristic = await service.getCharacteristic(writeCharacteristicUUID);
+        notifyCharacteristic = await service.getCharacteristic(notifyCharacteristicUUID);
+        await notifyCharacteristic.startNotifications();
+        notifyCharacteristic.addEventListener('characteristicvaluechanged', handleNotifications);
+      } catch (error) {
+        document.getElementById('result').innerText = "Connection failed: " + error;
+      }
+    }
+
+    function handleNotifications(event) {
+      let value = event.target.value;
+      let data = new Uint8Array(value.buffer);
+      let hexValue = Array.from(data).map(b => b.toString(16).padStart(2, '0')).join(' ');
+      document.getElementById('result').innerText = `Notification (Hex): ${hexValue}`;
+      if (data.length < 7) {
+        document.getElementById('result').innerText = "Notification data too short.";
+        return;
+      }
+      let index = 0;
+      let frameHead = data[index++];
+      if (frameHead !== 0xF5) {
+        document.getElementById('result').innerText = "Invalid frame head.";
+        return;
+      }
+      let sourceAddressHigh = data[index++];
+      let sourceAddressLow = data[index++];
+      let sourceAddressValue = (sourceAddressHigh << 8) | sourceAddressLow;
+      let targetAddressHigh = data[index++];
+      let targetAddressLow = data[index++];
+      let targetAddressValue = (targetAddressHigh << 8) | targetAddressLow;
+      let functionCode = data[index++];
+      let dataLength = data[index++];
+      if (data.length < index + dataLength + 2 + 1) {
+        document.getElementById('result').innerText = "Invalid data length.";
+        return;
+      }
+      let dataFields = data.slice(index, index + dataLength);
+      index += dataLength;
+      let crcHigh = data[index++];
+      let crcLow = data[index++];
+      let receivedCrc = (crcHigh << 8) | crcLow;
+      let frameTail = data[index++];
+      if (frameTail !== 0x55) {
+        document.getElementById('result').innerText = "Invalid frame tail.";
+        return;
+      }
+      let crcData = data.slice(1, index - 3);
+      let calculatedCrc = crc16Modbus(crcData);
+      if (calculatedCrc !== receivedCrc) {
+        document.getElementById('result').innerText = `CRC mismatch. Calculated: ${calculatedCrc.toString(16)}, Received: ${receivedCrc.toString(16)}`;
+        return;
+      }
+      document.getElementById('result').innerText = `
+         Notification Parsed:\n
+         Source Address: ${sourceAddressValue.toString(16).padStart(4, '0')}\n
+         Target Address: ${targetAddressValue.toString(16).padStart(4, '0')}\n
+         Function Code: ${functionCode.toString(16).padStart(2, '0')}\n
+         Data Length: ${dataLength}\n
+         Data Fields: ${dataFields}
+      `;
+      switch (functionCode) {
+        case 0x02:
+          handlePlaySingleScentResponse(dataFields);
+          break;
+        case 0x03:
+        case 0x11:
+          handleCheckStatusResponse(dataFields);
+          break;
+        case 0x00:
+          handleStopResponse(dataFields);
+          break;
+        default:
+          document.getElementById('result').innerText = `Unknown Function Code: ${functionCode}`;
+          break;
+      }
+    }
+
+    function crc16Modbus(bytes) {
+      let crc = 0xFFFF;
+      for (let byte of bytes) {
+        crc ^= byte;
+        for (let i = 0; i < 8; i++) {
+          let lsb = crc & 0x0001;
+          crc >>= 1;
+          if (lsb !== 0) {
+            crc ^= 0xA001;
+          }
+        }
+      }
+      return crc & 0xFFFF;
+    }
+
+    function handlePlaySingleScentResponse(dataFields) {
+      if (dataFields.length < 1) {
+        console.log("Invalid data length for Play Single Scent Response.");
+        return;
+      }
+      let result = dataFields[0];
+      if (result === 0x00) {
+        console.log("Play Single Scent executed successfully.");
+      } else {
+        console.log(`Play Single Scent failed with error code: ${result}`);
+      }
+    }
+
+    function handleCheckStatusResponse(dataFields) {
+      if (dataFields.length < 1) {
+        console.log("Invalid data length for Check Status Response.");
+        return;
+      }
+      let deviceStatus = dataFields[0];
+      console.log("Device Status:", deviceStatus.toString(16).padStart(2, '0'));
+      let statusMessage = "";
+      switch (deviceStatus) {
+        case 0x00:
+          statusMessage = "Device is in standby mode.";
+          console.log(statusMessage);
+          if (isCustomButtonActive && activeScent && activeScent.type === 'custom' && isWaitingForCompletion) {
+            console.log("Device in standby while waiting for completion. Scent cycle has completed naturally.");
+            isWaitingForCompletion = false;
+          }
+          break;
+        case 0x07:
+          statusMessage = "Device is playing scent (advanced mode).";
+          console.log(statusMessage);
+          break;
+        case 0x09:
+          statusMessage = "Material core fault.";
+          console.log(statusMessage);
+          break;
+        case 0xFF:
+          statusMessage = "Other errors.";
+          console.log(statusMessage);
+          break;
+        case 0xFE:
+          statusMessage = "Script does not exist.";
+          console.log(statusMessage);
+          break;
+        default:
+          statusMessage = "Unknown device status.";
+          console.log(statusMessage);
+          break;
+      }
+      const resultElement = document.getElementById('result');
+      if (resultElement.innerText.indexOf('Notification') === -1) {
+        resultElement.innerText = `Device Status: ${statusMessage}`;
+      }
+      return deviceStatus;
+    }
+
+    function handleStopResponse(dataFields) {
+      if (dataFields.length < 1) {
+        console.log("Invalid data length for Stop Response.");
+        return;
+      }
+      let result = dataFields[0];
+      if (result === 0x00) {
+        console.log("Stop command executed successfully.");
+      } else {
+        console.log(`Stop command failed with error code: ${result}`);
+      }
+    }
+
+    async function startScent(scentNumber) {
+      const buttons = document.querySelectorAll('.buttons-section button');
+      buttons.forEach(button => {
+        button.style.backgroundColor = '';
+        button.style.color = '';
+      });
+      const sliderButtons = document.querySelectorAll('.slider-item button');
+      sliderButtons.forEach(button => {
+        button.style.backgroundColor = '';
+        button.style.color = '';
+      });
+      const sliderButton = document.querySelector(`.slider-item:nth-child(${scentNumber}) button`);
+      if (sliderButton) {
+        sliderButton.style.backgroundColor = 'green';
+        sliderButton.style.color = 'white';
+      }
+      const sliders = document.querySelectorAll('.sliders-section input[type="range"]');
+      sliders.forEach((slider, index) => {
+        let output = slider.nextElementSibling;
+        if (index + 1 === scentNumber) {
+          slider.value = 10;
+          output.textContent = slider.value;
+        } else {
+          slider.value = 0;
+          output.textContent = slider.value;
+        }
+      });
+      const scentChannel = scentNumber;
+      const playtime = 0;
+      let data = [];
+      data.push(scentChannel & 0xFF);
+      if (playtime === 0) {
+        data.push(0xFF, 0xFF, 0xFF, 0xFF);
+      } else {
+        data.push((playtime >> 24) & 0xFF);
+        data.push((playtime >> 16) & 0xFF);
+        data.push((playtime >> 8) & 0xFF);
+        data.push(playtime & 0xFF);
+      }
+      let command = buildCommand(0x02, data);
+      console.log('Command Bytes:', Array.from(command).map(b => b.toString(16).padStart(2, '0')).join(' '));
+      try {
+        await writeCharacteristic.writeValue(command);
+        console.log('Start Scent Command Sent');
+      } catch (error) {
+        console.log('Error writing to device:', error);
+      }
+      document.getElementById('result').innerText = `Scent started on channel ${scentChannel} for ${playtime} ms`;
+      isCustomButtonActive = false;
+      stopKeepAliveTimer();
+    }
+
+    function getScentValues() {
+      const sliderValues = [
+        document.getElementById('slider1').value,
+        document.getElementById('slider2').value,
+        document.getElementById('slider3').value,
+        document.getElementById('slider4').value,
+        document.getElementById('slider5').value,
+        document.getElementById('slider6').value
+      ].map(Number);
+      const percentageValues = sliderValues.map(value => value * 10);
+      startMultiChannelScent(percentageValues);
+    }
+
+    function setSlidersAndStartScent(values) {
+      const buttons = document.querySelectorAll('.buttons-section button');
+      buttons.forEach(button => {
+        button.style.backgroundColor = '';
+        button.style.color = '';
+      });
+      const valuesString = values.join(',');
+      const clickedButton = Array.from(buttons).find(button => {
+        const onclickAttr = button.getAttribute('onclick');
+        return onclickAttr && onclickAttr.includes(valuesString);
+      });
+      if (clickedButton) {
+        clickedButton.style.backgroundColor = 'green';
+        clickedButton.style.color = 'white';
+      }
+      const sliders = [
+        document.getElementById('slider1'),
+        document.getElementById('slider2'),
+        document.getElementById('slider3'),
+        document.getElementById('slider4'),
+        document.getElementById('slider5'),
+        document.getElementById('slider6')
+      ];
+      const scaledValues = values.map(value => Math.round(value / 10));
+      sliders.forEach((slider, index) => {
+        if (slider && scaledValues[index] !== undefined) {
+          slider.value = scaledValues[index];
+          const output = slider.nextElementSibling;
+          if (output) {
+            output.value = slider.value;
+            output.textContent = slider.value;
+          }
+        }
+      });
+      isCustomButtonActive = true;
+      activeScent = {
+        type: 'custom',
+        values: [...values]
+      };
+      currentSequentialIndex = 0;
+      if (customCommandMode === 'sequential') {
+        startSequentialScents(values);
+      } else if (customCommandMode === 'single') {
+        let maxIndex = 0;
+        let maxValue = 0;
+        values.forEach((value, index) => {
+          if (value > maxValue) {
+            maxValue = value;
+            maxIndex = index;
+          }
+        });
+        startSingleScentForCustom(maxIndex + 1);
+      } else {
+        startMultiChannelScentWithKeepAlive(values);
+      }
+    }
+
+    async function startMultiChannelScentWithKeepAlive(channelRatios) {
+      console.log('Starting multi-channel scent with keep-alive for custom button');
+      const totalVolume = 255;
+      let cmdList = [0, 0, 0, 0, 0, 0];
+      let playChannelNumberTotal = 0;
+      let playChannelRatioTotal = 0;
+      for (let ratio of channelRatios) {
+        if (ratio !== 0) {
+          playChannelNumberTotal++;
+          playChannelRatioTotal += ratio;
+        }
+      }
+      if (playChannelRatioTotal === 0) {
+        document.getElementById('result').innerText = "Please select at least one channel to play";
+        return;
+      }
+      const channelAvgVolume = totalVolume / playChannelRatioTotal;
+      for (let i = 0; i < channelRatios.length; i++) {
+        cmdList[i] = Math.round(channelRatios[i] * channelAvgVolume);
+      }
+      if (activeScent) {
+        activeScent.cmdList = [...cmdList];
+      }
+      await sendMultiChannelCommand(cmdList, true);
+      startMultiChannelKeepAlive();
+    }
+
+    async function sendMultiChannelCommand(cmdList, indefinite = false) {
+      let data = [];
+      for (let i = 0; i < cmdList.length; i++) {
+        data.push(cmdList[i]); 
+      }
+      if (indefinite) {
+        const duration = 20000;
+        data.push((duration >> 24) & 0xFF);
+        data.push((duration >> 16) & 0xFF);
+        data.push((duration >> 8) & 0xFF);
+        data.push(duration & 0xFF);
+      } else {
+        const duration = 30000;
+        data.push((duration >> 24) & 0xFF);
+        data.push((duration >> 16) & 0xFF);
+        data.push((duration >> 8) & 0xFF);
+        data.push(duration & 0xFF);
+      }
+      let command = buildCommandMulti(0x13, data);
+      console.log('Multi-Channel Command Bytes:', Array.from(command).map(b => b.toString(16).padStart(2, '0')).join(' '));
+      try {
+        await writeCharacteristic.writeValue(command);
+        console.log('Multi-Channel Command Sent');
+        document.getElementById('result').innerText = `Multi-channel scent started: ${cmdList.join(', ')}`;
+        lastCommandTime = Date.now();
+        isWaitingForCompletion = true;
+        return true;
+      } catch (error) {
+        console.log('Error writing to device:', error);
+        document.getElementById('result').innerText = `Error starting multi-channel scent: ${error}`;
+        return false;
+      }
+    }
+
+    function startMultiChannelKeepAlive() {
+      stopKeepAliveTimer();
+      if (!isCustomButtonActive) return;
+      console.log('Starting multi-channel keep-alive timer for continuous playback');
+      keepAliveTimer = setInterval(async () => {
+        if (!activeScent || !device || !device.gatt.connected || !isCustomButtonActive || !activeScent.cmdList) {
+          stopKeepAliveTimer();
+          return;
+        }
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - lastCommandTime;
+        if (!isWaitingForCompletion || elapsedTime >= 18000) {
+          console.log('Sending multi-channel keep-alive command');
+          try {
+            const status = await checkStatusAndGetResult();
+            if (status === 0x00 || elapsedTime >= 18000) {
+              isWaitingForCompletion = false;
+              await sendMultiChannelCommand(activeScent.cmdList, true);
+              console.log('Multi-channel keep-alive command sent successfully');
+            } else {
+              console.log('Device still playing, waiting for completion');
+            }
+          } catch (error) {
+            console.log('Error in keep-alive cycle:', error);
+            if (device && !device.gatt.connected) {
+              try {
+                await device.gatt.connect();
+                console.log('Reconnected after keep-alive error');
+                if (activeScent && activeScent.cmdList) {
+                  await sendMultiChannelCommand(activeScent.cmdList, true);
+                }
+              } catch (reconnectError) {
+                console.log('Failed to reconnect after keep-alive error:', reconnectError);
+                stopKeepAliveTimer();
+              }
+            }
+          }
+        } else {
+          console.log(`Waiting for current scent cycle to complete. Elapsed time: ${elapsedTime}ms`);
+        }
+      }, 5000);
+    }
+
+    async function checkStatusAndGetResult() {
+      let data = [];
+      let command = buildCommand(0x11, data);
+      console.log('Status Check Command Bytes:', Array.from(command).map(b => b.toString(16).padStart(2, '0')).join(' '));
+      return new Promise((resolve, reject) => {
+        const statusListener = (event) => {
+          let value = event.target.value;
+          let data = new Uint8Array(value.buffer);
+          if (data.length >= 7 && data[5] === 0x11) {
+            const statusCode = data[7];
+            notifyCharacteristic.removeEventListener('characteristicvaluechanged', statusListener);
+            resolve(statusCode);
+          }
+        };
+        notifyCharacteristic.addEventListener('characteristicvaluechanged', statusListener);
+        const timeout = setTimeout(() => {
+          notifyCharacteristic.removeEventListener('characteristicvaluechanged', statusListener);
+          reject(new Error('Status check timed out'));
+        }, 3000);
+        writeCharacteristic.writeValue(command)
+          .then(() => {
+            console.log('Status Check Command Sent');
+          })
+          .catch((error) => {
+            clearTimeout(timeout);
+            notifyCharacteristic.removeEventListener('characteristicvaluechanged', statusListener);
+            reject(error);
+          });
+      });
+    }
+
+    async function checkStatus() {
+      let data = [];
+      let command = buildCommand(0x11, data);
+      console.log('Command Bytes:', Array.from(command).map(b => b.toString(16).padStart(2, '0')).join(' '));
+      try {
+        await writeCharacteristic.writeValue(command);
+        console.log('Status Check Command Sent');
+      } catch (error) {
+        console.log('Error writing to device:', error);
+      }
+      document.getElementById('result').innerText = 'Status check sent';
+    }
+
+    function buildCommand(functionCode, data) {
+      let commandBytes = [];
+      commandBytes.push(0xF5);
+      const sourceAddressBytes = sourceAddress.split(' ').map(byte => parseInt(byte, 16));
+      commandBytes.push(...sourceAddressBytes);
+      const targetAddressBytes = targetAddress.split(' ').map(byte => parseInt(byte, 16));
+      commandBytes.push(...targetAddressBytes);
+      commandBytes.push(functionCode & 0xFF);
+      commandBytes.push(data.length & 0xFF);
+      commandBytes.push(...data);
+      let crcInput = commandBytes.slice(1);
+      let crc = crc16Modbus(crcInput);
+      commandBytes.push((crc >> 8) & 0xFF);
+      commandBytes.push(crc & 0xFF);
+      commandBytes.push(0x55);
+      return new Uint8Array(commandBytes);
+    }
+
+    function buildCommandMulti(functionCode, data) {
+      let commandBytes = [];
+      commandBytes.push(0xF5);
+      const sourceAddressBytes = sourceAddress.split(' ').map(byte => parseInt(byte, 16));
+      commandBytes.push(...sourceAddressBytes);
+      const targetAddressBytes = targetAddress.split(' ').map(byte => parseInt(byte, 16));
+      commandBytes.push(...targetAddressBytes);
+      commandBytes.push(functionCode & 0xFF);
+      commandBytes.push(data.length & 0xFF);
+      commandBytes.push(...data);
+      let crcInput = commandBytes.slice(1);
+      let crc = crc16Modbus(crcInput);
+      commandBytes.push((crc >> 8) & 0xFF);
+      commandBytes.push(crc & 0xFF);
+      commandBytes.push(0x55);
+      return new Uint8Array(commandBytes);
+    }
+
+    const customerLogos = {
+      'XPeng': 'logos/XPeng_Logo.svg',
+      'huawei': 'logos/Huawei.png',
+      'CustomerB': 'logos/CustomerB_Logo.png'
+    };
+
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const currentCustomer = getQueryParam('customer');
+    const logoImage = document.getElementById('customer-logo');
+    if (currentCustomer && customerLogos[currentCustomer]) {
+      logoImage.src = customerLogos[currentCustomer];
+      logoImage.style.display = 'block';
+    } else {
+      logoImage.style.display = 'none';
+    }
+
+    let scentLevels = [100, 100, 100, 100, 100, 100];
+    let isAdmin = false;
+    let autoUpdateEnabled = true;
+    let decreaseRate = 1.0;
+    let updateInterval = 1;
+
+    function saveScentLevels() {
+      localStorage.setItem('scentLevels', JSON.stringify(scentLevels));
+    }
+
+    function saveSettings() {
+      localStorage.setItem('autoUpdateEnabled', autoUpdateEnabled.toString());
+      localStorage.setItem('updateInterval', updateInterval.toString());
+    }
+
+    function loadScentLevels() {
+      const savedLevels = localStorage.getItem('scentLevels');
+      if (savedLevels) {
+        scentLevels = JSON.parse(savedLevels);
+        scentLevels.forEach((level, index) => {
+          updateScentLevel(index, level, false);
+        });
+      }
+    }
+
+    function loadSettings() {
+      const savedAutoUpdate = localStorage.getItem('autoUpdateEnabled');
+      if (savedAutoUpdate !== null) {
+        autoUpdateEnabled = savedAutoUpdate === 'true';
+      }
+      const savedUpdateInterval = localStorage.getItem('updateInterval');
+      if (savedUpdateInterval !== null) {
+        let parsedInterval = parseInt(savedUpdateInterval);
+        if (parsedInterval > 1000) {
+          parsedInterval = Math.round(parsedInterval / 60000);
+        } else if (parsedInterval > 60) {
+          parsedInterval = Math.round(parsedInterval / 60);
+        }
+        updateInterval = Math.max(1, parsedInterval);
+      }
+    }
+
+    function updateScentLevel(index, manualValue = null, shouldSave = true) {
+      if (manualValue !== null) {
+        scentLevels[index] = manualValue;
+      } else if (autoUpdateEnabled) {
+        scentLevels[index] = Math.max(0, scentLevels[index] - decreaseRate);
+      }
+      const levelItem = document.querySelectorAll('.scent-level-item')[index];
+      const levelDisplay = levelItem.querySelector('.level-display');
+      const progressBar = levelItem.querySelector('.progress-bar');
+      if (!levelDisplay || !progressBar) return;
+      const level = Math.round(scentLevels[index]);
+      progressBar.style.width = level + '%';
+      if (level <= 10) {
+        levelDisplay.textContent = level + '%';
+        levelItem.classList.remove('level-medium', 'level-high');
+        levelItem.classList.add('level-low');
+      } else if (level <= 60) {
+        levelDisplay.textContent = level + '%';
+        levelItem.classList.remove('level-low', 'level-high');
+        levelItem.classList.add('level-medium');
+      } else {
+        levelDisplay.textContent = level + '%';
+        levelItem.classList.remove('level-low', 'level-medium');
+        levelItem.classList.add('level-high');
+      }
+      if (isAdmin) {
+        levelItem.style.cursor = 'pointer';
+        levelItem.onclick = () => promptScentLevel(index);
+      }
+      if (shouldSave) {
+        saveScentLevels();
+      }
+    }
+
+    function promptScentLevel(index) {
+      if (!isAdmin) return;
+      const newLevel = prompt(`Enter new level for scent ${index + 1} (0-100):`, Math.round(scentLevels[index]));
+      if (newLevel === null) return;
+      const level = parseInt(newLevel);
+      if (isNaN(level) || level < 0 || level > 100) {
+        alert('Please enter a valid number between 0 and 100');
+        return;
+      }
+      updateScentLevel(index, level);
+    }
+
+    function updateIntervalSettings() {
+      if (!isAdmin) return;
+      const intervalInput = document.getElementById('update-interval');
+      if (!intervalInput) return;
+      const newInterval = parseInt(intervalInput.value);
+      if (isNaN(newInterval) || newInterval < 1 || newInterval > 60) {
+        alert('更新间隔必须是1到60之间的数字（1分钟-60分钟）');
+        intervalInput.value = updateInterval;
+        return;
+      }
+      if (updateInterval !== newInterval) {
+        updateInterval = newInterval;
+        if (window.updateTimer) {
+          clearInterval(window.updateTimer);
+        }
+        startUpdateTimer();
+      }
+      saveSettings();
+      alert('设置已保存');
+    }
+
+    function startUpdateTimer() {
+      window.updateTimer = setInterval(() => {
+        if (autoUpdateEnabled) {
+          const indicesToUpdate = getRandomIndices(scentLevels.length, 2);
+          indicesToUpdate.forEach(index => {
+            updateScentLevel(index);
+          });
+        }
+      }, updateInterval * 60 * 1000);
+    }
+
+    function toggleAutoUpdate() {
+      if (!isAdmin) return;
+      autoUpdateEnabled = !autoUpdateEnabled;
+      const toggleButton = document.getElementById('auto-update-toggle');
+      if (toggleButton) {
+        toggleButton.textContent = autoUpdateEnabled ? '暂停自动更新' : '开启自动更新';
+        toggleButton.style.backgroundColor = autoUpdateEnabled ? '#ff4444' : '#4CAF50';
+      }
+      saveSettings();
+    }
+
+    function resetAllLevels() {
+      if (!isAdmin) return;
+      scentLevels = scentLevels.map(() => 100);
+      for (let i = 0; i < scentLevels.length; i++) {
+        updateScentLevel(i, 100, false);
+      }
+      saveScentLevels();
+    }
+
+    function getRandomIndices(max, count) {
+      const indices = new Set();
+      while (indices.size < count) {
+        indices.add(Math.floor(Math.random() * max));
+      }
+      return Array.from(indices);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initLanguage();
+      const urlParams = new URLSearchParams(window.location.search);
+      isAdmin = urlParams.get('customer') === 'admin';
+      loadSettings();
+      loadScentLevels();
+      if (isAdmin) {
+        const adminControls = document.createElement('div');
+        adminControls.className = 'admin-controls';
+        adminControls.innerHTML = `
+          <div class="admin-header">
+            <h2>管理员控制面板</h2>
+            <div class="admin-buttons">
+              <button id="auto-update-toggle" onclick="toggleAutoUpdate()">${autoUpdateEnabled ? '暂停自动更新' : '开启自动更新'}</button>
+              <button onclick="resetAllLevels()">重置所有香料</button>
+            </div>
+          </div>
+          <div class="admin-settings">
+            <div class="settings-row">
+              <label for="update-interval">更新间隔 (分钟):</label>
+              <input type="number" id="update-interval" min="1" max="60" step="1" value="${updateInterval}">
+              <span class="settings-info">每次更新减少1%</span>
+            </div>
+            <button onclick="updateIntervalSettings()" class="settings-save-btn">保存设置</button>
+          </div>
+          <p class="admin-instructions">点击百分比数字可以手动修改香料余量</p>
+        `;
+        const header = document.querySelector('header');
+        header.parentNode.insertBefore(adminControls, header.nextSibling);
+        const toggleButton = document.getElementById('auto-update-toggle');
+        if (toggleButton) {
+          toggleButton.style.backgroundColor = autoUpdateEnabled ? '#ff4444' : '#4CAF50';
+        }
+        document.querySelectorAll('.scent-level-item').forEach((item, index) => {
+          item.style.cursor = 'pointer';
+          item.onclick = () => promptScentLevel(index);
+        });
+      }
+      startUpdateTimer();
+      const saveButton = document.querySelector('.r-button:nth-child(4)');
+      saveButton.onclick = saveCurrentConfig;
+      const customButtons = document.querySelectorAll('.buttons-section button');
+      customButtons.forEach((button, index) => {
+        button.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+          if (savedConfigs[index]) {
+            if (confirm('是否要清除这个香型？')) {
+              savedConfigs[index] = null;
+              button.textContent = `自定义${index + 1}`;
+              button.setAttribute('onclick', '');
+            }
+          }
+        });
+      });
+    });
+
+    let savedConfigs = new Array(6).fill(null);
+
+    function getCurrentSliderValues() {
+      const values = [
+        parseInt(document.getElementById('slider1').value),
+        parseInt(document.getElementById('slider2').value),
+        parseInt(document.getElementById('slider3').value),
+        parseInt(document.getElementById('slider4').value),
+        parseInt(document.getElementById('slider5').value),
+        parseInt(document.getElementById('slider6').value)
+      ];
+      return values.map(value => value * 10);
+    }
+
+    function findNextAvailableButton() {
+      for (let i = 0; i < savedConfigs.length; i++) {
+        if (savedConfigs[i] === null) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function saveCurrentConfig() {
+      const nextSlot = findNextAvailableButton();
+      if (nextSlot === -1) {
+        alert('所有自定义按钮已使用。请先清除一个按钮后再保存。');
+        return;
+      }
+      const customName = prompt('请为这个香型命名：');
+      if (!customName) return;
+      const currentValues = getCurrentSliderValues();
+      console.log('Current Values:', currentValues);
+      const config = {
+        name: customName,
+        values: currentValues
+      };
+      savedConfigs[nextSlot] = config;
+      const button = document.querySelectorAll('.buttons-section button')[nextSlot];
+      button.textContent = customName;
+      button.setAttribute('onclick', `setSlidersAndStartScent([${currentValues.join(',')}])`);
+    }
+
+    function startKeepAliveTimer() {
+      stopKeepAliveTimer();
+      if (!isCustomButtonActive) return;
+      console.log('Starting keep-alive timer for continuous scent playback');
+      keepAliveTimer = setInterval(async () => {
+        if (!activeScent || !device || !device.gatt.connected || !isCustomButtonActive) {
+          stopKeepAliveTimer();
+          return;
+        }
+        console.log('Sending keep-alive command to maintain scent playback');
+        try {
+          if (activeScent.type === 'custom' && activeScent.cmdList) {
+            let data = [];
+            for (let i = 0; i < activeScent.cmdList.length; i++) {
+              data.push(activeScent.cmdList[i]);
+            }
+            data.push(0xFF, 0xFF, 0xFF, 0xFF);
+            let command = buildCommandMulti(0x13, data);
+            await writeCharacteristic.writeValue(command);
+            console.log('Keep-alive command sent successfully');
+          }
+        } catch (error) {
+          console.log('Error sending keep-alive command:', error);
+          if (device && !device.gatt.connected) {
+            try {
+              await device.gatt.connect();
+              console.log('Reconnected after keep-alive error');
+              if (activeScent && activeScent.type === 'custom') {
+                startMultiChannelScent(activeScent.values);
+              }
+            } catch (reconnectError) {
+              console.log('Failed to reconnect after keep-alive error:', reconnectError);
+              stopKeepAliveTimer();
+            }
+          }
+        }
+      }, KEEP_ALIVE_INTERVAL);
+    }
+
+    function stopKeepAliveTimer() {
+      if (keepAliveTimer) {
+        clearInterval(keepAliveTimer);
+        keepAliveTimer = null;
+        console.log('Keep-alive timer stopped');
+      }
+    }
+
+    device?.addEventListener('gattserverdisconnected', async () => {
+      console.log('Bluetooth device disconnected');
+      document.getElementById('result').innerText = 'Device disconnected. Attempting to reconnect...';
+      stopKeepAliveTimer();
+      try {
+        await device.gatt.connect();
+        console.log('Reconnected to device');
+        document.getElementById('result').innerText = 'Reconnected to device';
+        if (isCustomButtonActive && activeScent && activeScent.type === 'custom') {
+          isWaitingForCompletion = false;
+          if (customCommandMode === 'sequential' && activeScent.activeChannels) {
+            startSequentialScents(activeScent.values);
+          } else if (customCommandMode === 'single' && activeScent.singleChannel) {
+            startSingleScentForCustom(activeScent.singleChannel);
+          } else if (customCommandMode === 'multi' && activeScent.cmdList) {
+            sendMultiChannelCommand(activeScent.cmdList, true);
+            startMultiChannelKeepAlive();
+          }
+        }
+      } catch (error) {
+        console.log('Failed to reconnect:', error);
+        document.getElementById('result').innerText = 'Failed to reconnect: ' + error;
+      }
+    });
+
+    function startSequentialScents(values) {
+      const activeChannels = [];
+      values.forEach((value, index) => {
+        if (value > 0) {
+          activeChannels.push({
+            channel: index + 1,
+            value: value
+          });
+        }
+      });
+      if (activeScent) {
+        activeScent.activeChannels = activeChannels;
+      }
+      if (activeChannels.length === 0) {
+        document.getElementById('result').innerText = "No active scents selected";
+        return;
+      }
+      currentSequentialIndex = 0;
+      startNextSequentialScent();
+      startSequentialTimer();
+    }
+
+    async function startNextSequentialScent() {
+      if (!activeScent || !activeScent.activeChannels || activeScent.activeChannels.length === 0) {
+        return;
+      }
+      const channelInfo = activeScent.activeChannels[currentSequentialIndex];
+      console.log(`Starting sequential scent ${currentSequentialIndex + 1}/${activeScent.activeChannels.length}: Channel ${channelInfo.channel} (Intensity: ${channelInfo.value})`);
+      // Command sending logic for sequential scent playback goes here.
+    }
+
+    // Note: Additional functions such as startSequentialTimer and startSingleScentForCustom would be defined here.
+  </script>
+</body>
+</html>

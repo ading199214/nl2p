@@ -20,6 +20,7 @@ interface Translations {
   title: string;
   subtitle?: string;
   newSession: string;
+  importHtml: string;
   deploy: string;
   deploying: string;
   viewSite: string;
@@ -59,6 +60,7 @@ const translations: Record<string, Translations> = {
     title: "Natural Language to Web Page",
     subtitle: "",
     newSession: "New Session",
+    importHtml: "Import HTML",
     deploy: "Deploy to Netlify",
     deploying: "Deploying...",
     viewSite: "View Site",
@@ -96,6 +98,7 @@ const translations: Record<string, Translations> = {
     title: "码农老弟",
     subtitle: "开发你交给我就行",
     newSession: "新建会话",
+    importHtml: "导入HTML",
     deploy: "部署到网络",
     deploying: "部署中...",
     viewSite: "查看网站",
@@ -709,6 +712,24 @@ function App() {
     }
   };
 
+  // Add new state for imported HTML
+  const [importedHtml, setImportedHtml] = useState<string>('');
+
+  // Add new function to handle file import
+  const handleFileImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        setImportedHtml(content);
+        setGeneratedCode(content);
+        setRefreshKey(prev => prev + 1);
+      };
+      reader.readAsText(file);
+    }
+  };
+
   return (
     <div className="app">
       <div className="app-wrapper active">
@@ -722,17 +743,30 @@ function App() {
             )}
           </div>
           <div className="header-actions">
+            <input
+              type="file"
+              id="html-import"
+              accept=".html"
+              style={{ display: 'none' }}
+              onChange={handleFileImport}
+            />
+            <button 
+              className="action-btn import-btn"
+              onClick={() => document.getElementById('html-import')?.click()}
+            >
+              {t.importHtml}
+            </button>
             {generatedCode && (
               <>
                 <button
-                  className="deploy-btn"
+                  className="action-btn deploy-btn"
                   onClick={deployToNetlify}
-                  disabled={isDeploying || !generatedCode}
+                  disabled={true}
                 >
                   {isDeploying ? t.deploying : t.deploy}
                 </button>
                 <button
-                  className="export-btn"
+                  className="action-btn export-btn"
                   onClick={exportHtml}
                   title={t.exportHtml}
                 >
@@ -740,20 +774,12 @@ function App() {
                 </button>
               </>
             )}
-            <button className="new-session-btn" onClick={createNewSession}>
+            <button className="action-btn new-session-btn" onClick={createNewSession}>
               {t.newSession}
             </button>
-            <button className="language-toggle-btn" onClick={toggleLanguage}>
+            <button className="action-btn language-toggle-btn" onClick={toggleLanguage}>
               {language === 'en' ? '中文' : 'English'}
             </button>
-            {deploymentUrl && (
-              <div className="deployment-status">
-                <span className="deployment-dot"></span>
-                <a href={deploymentUrl} target="_blank" rel="noopener noreferrer">
-                  {t.viewSite}
-                </a>
-              </div>
-            )}
           </div>
         </header>
 
