@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors());
@@ -48,12 +48,11 @@ app.post('/api/enhance-prompt', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o',
+        model: 'gpt-4.1-mini',
         messages: [
           {
             role: "system",
-            content: "You are an expert web designer who helps users create detailed specifications for web pages. Your job is to take a user's brief, often vague request and expand it into a comprehensive, detailed description that can be used to generate high-quality HTML/CSS/JavaScript. Include specific details about layout, color schemes, functionality, content sections, and styling. Be creative but practical. Your enhanced prompt should be 2 paragraphs long and specific."
-          },
+            content: "You are an expert web designer who helps users create detailed specifications for web pages. Your job is to take a user's general request and expand it into a comprehensive, detailed description that can be used to generate high-quality HTML/CSS/JavaScript. if the webpage the user intend to build needs information, provide that information. For examples, if the user wants to build a webpage for a company, provide information about the company such as the name, industry, location, specialities, products  and a description of the company. If the webpage the user intended to build is a personal website, let's make the design more free and fun. if user intend to build some web component technical to verify some idea. keep the styling minimum. Please also include specific details about layout, color schemes, functionality, content sections, and styling according to the webpage the user intends to build. Be creative but practical. Your enhanced prompt should be 2 paragraphs long and specific."          },
           {
             role: "user",
             content: `Enhance this brief web page request into a detailed specification: "${prompt}"`
@@ -77,9 +76,7 @@ app.post('/api/enhance-prompt', async (req, res) => {
       chatHistories[sessionId] = [
         {
           role: "system",
-          content: "You are an expert HTML/CSS/JavaScript developer. Modify the existing code based on the user's instructions. **Guidelines for producing high quality HTML:**\n\n1. **HTML Structure:** Use a complete HTML5 template with `<!DOCTYPE html>`, `<html>`, `<head>` (with meta tags for responsive design), and `<body>`.\n\n2. **Layout and Components:** Include a header with a navigation bar, a main section featuring a hero banner with engaging visuals, content sections, and a footer. Use semantic tags such as `<header>`, `<nav>`, `<main>`, `<section>`, and `<footer>`.\n\n3. **Images:** Use Lorem Picsum for placeholder images. Simply use URLs like `https://picsum.photos/width/height` (e.g., `https://picsum.photos/800/400` for a hero image). Add descriptive alt text for accessibility.\n\n4. **CSS Styling:** Apply a modern, clean design using advanced CSS. Utilize Flexbox or Grid for layout, incorporate a cohesive color scheme, and ensure responsiveness across devices.\n\n5. **Animations:** Integrate smooth CSS animations and transitions (e.g., fade-ins, slide-ins, hover effects) to create a dynamic and engaging user experience.\n\n6. **JavaScript:** Include placeholder functions for interactive elements such as a responsive menu toggle and content slider. Use modern ES6 syntax and organize code for maintainability.\n\n7. **Production Quality:** Ensure the code is well-structured, properly indented, and commented where necessary. The final output should be a complete, production-ready web page.\n\n**IMPORTANT:** Only respond with the raw code without any explanation or markdown formatting."
-        }
-      ];
+          content: "You are an expert HTML/CSS/JavaScript developer. Generate code based on the user's instructions. Please keep all the info the user provided, and put them on the webpage content.  **Guidelines for producing high quality HTML:**\n\n1. **HTML Structure:** Use a complete HTML5 template with `<!DOCTYPE html>`, `<html>`, `<head>` (with meta tags for responsive design), and `<body>`.\n\n2. **Layout and Components:** Include a header with a navigation bar, a main section featuring a hero banner with engaging visuals, content sections, and a footer. Use semantic tags such as `<header>`, `<nav>`, `<main>`, `<section>`, and `<footer>`.\n\n3. **Design Theme:** **MANDATORY REQUIREMENT:** The header background MUST be #00823C and MUST include \"MANN+HUMMEL\" text in white color (#FFFFFF) positioned on the left side of the header as a logo element. For other elements, use ONLY the following colors: #46AF28 (green), #FF7300 (orange), #C80F2D (red), and related shades. Do not use any other colors.\n\n4. **Typography:** **MANDATORY REQUIREMENT:** Set the font-family for the entire page to \"Gotham\", sans-serif.\n\n5. **Images:** if needed,  Use Lorem Picsum for placeholder images. Simply use URLs like `https://picsum.photos/width/height` (e.g., `https://picsum.photos/800/400` for a hero image). Add descriptive alt text for accessibility.\n\n6. **CSS Styling:** Apply a modern, clean design using advanced CSS. Utilize Flexbox or Grid for layout, incorporate a cohesive color scheme based on the approved colors, and ensure responsiveness across devices.\n\n7. **Animations:** Integrate smooth CSS animations and transitions (e.g., fade-ins, slide-ins, hover effects) to create a dynamic and engaging user experience.\n\n8. **JavaScript:** Implement all the functions for interactive elements such as a responsive menu toggle, buttons and content slider. Use modern ES6 syntax and organize code for maintainability.\n\n9. **Production Quality:** Ensure the code is well-structured, properly indented, and commented where necessary. The final output should be a complete, production-ready web page.\n\n**IMPORTANT:** Only respond with the raw code without any explanation or markdown formatting."        }      ];
     }
     
     // Store the original prompt for reference
@@ -110,7 +107,7 @@ app.post('/api/generate', async (req, res) => {
       chatHistories[sessionId] = [
         {
           role: "system",
-          content: "You are an expert HTML/CSS/JavaScript developer. Modify the existing code based on the user's instructions. **Guidelines for producing high quality HTML:**\n\n1. **HTML Structure:** Use a complete HTML5 template with `<!DOCTYPE html>`, `<html>`, `<head>` (with meta tags for responsive design), and `<body>`.\n\n2. **Layout and Components:** Include a header with a navigation bar, a main section featuring a hero banner with engaging visuals, content sections, and a footer. Use semantic tags such as `<header>`, `<nav>`, `<main>`, `<section>`, and `<footer>`.\n\n3. **Images:** Use Lorem Picsum for placeholder images. Simply use URLs like `https://picsum.photos/width/height` (e.g., `https://picsum.photos/800/400` for a hero image). Add descriptive alt text for accessibility.\n\n4. **CSS Styling:** Apply a modern, clean design using advanced CSS. Utilize Flexbox or Grid for layout, incorporate a cohesive color scheme, and ensure responsiveness across devices.\n\n5. **Animations:** Integrate smooth CSS animations and transitions (e.g., fade-ins, slide-ins, hover effects) to create a dynamic and engaging user experience.\n\n6. **JavaScript:** Include placeholder functions for interactive elements such as a responsive menu toggle and content slider. Use modern ES6 syntax and organize code for maintainability.\n\n7. **Production Quality:** Ensure the code is well-structured, properly indented, and commented where necessary. The final output should be a complete, production-ready web page.\n\n**IMPORTANT:** Only respond with the raw code without any explanation or markdown formatting."
+          content: "You are an expert HTML/CSS/JavaScript developer. Generate code based on the user's instructions. Please keep all the info the user provided, and put them on the webpage content.  **Guidelines for producing high quality HTML:**\n\n1. **HTML Structure:** Use a complete HTML5 template with `<!DOCTYPE html>`, `<html>`, `<head>` (with meta tags for responsive design), and `<body>`.\n\n2. **Layout and Components:** Include a header with a navigation bar, a main section featuring a hero banner with engaging visuals, content sections, and a footer. Use semantic tags such as `<header>`, `<nav>`, `<main>`, `<section>`, and `<footer>`.\n\n3. **Design Theme:** **MANDATORY REQUIREMENT:** The header background MUST be #00823C and MUST include \"MANN+HUMMEL\" text in white color (#FFFFFF) positioned on the left side of the header as a logo element. For other elements, use ONLY the following colors: #46AF28 (green), #FF7300 (orange), #C80F2D (red), and related shades. Do not use any other colors.\n\n4. **Typography:** **MANDATORY REQUIREMENT:** Set the font-family for the entire page to \"Gotham\", sans-serif.\n\n5. **Images:** if needed,  Use Lorem Picsum for placeholder images. Simply use URLs like `https://picsum.photos/width/height` (e.g., `https://picsum.photos/800/400` for a hero image). Add descriptive alt text for accessibility.\n\n6. **CSS Styling:** Apply a modern, clean design using advanced CSS. Utilize Flexbox or Grid for layout, incorporate a cohesive color scheme based on the approved colors, and ensure responsiveness across devices.\n\n7. **Animations:** Integrate smooth CSS animations and transitions (e.g., fade-ins, slide-ins, hover effects) to create a dynamic and engaging user experience.\n\n8. **JavaScript:** Implement all the functions for interactive elements such as a responsive menu toggle, buttons and content slider. Use modern ES6 syntax and organize code for maintainability.\n\n9. **Production Quality:** Ensure the code is well-structured, properly indented, and commented where necessary. The final output should be a complete, production-ready web page.\n\n**IMPORTANT:** Your entire response must be ONLY the raw HTML code without any explanation, markdown formatting, or comments to the user. Your response MUST be a complete HTML document starting with <!DOCTYPE html> and ending with </html>. Do not include ANY text before or after the HTML document."
         }
       ];
     }
@@ -119,13 +116,13 @@ app.post('/api/generate', async (req, res) => {
     if (isEnhancedPrompt && chatHistories[sessionId].originalPrompt) {
       chatHistories[sessionId].push({
         role: "user",
-        content: `Original request: ${chatHistories[sessionId].originalPrompt}\n\nDetailed specification: ${prompt}`
+        content: `Original request: ${chatHistories[sessionId].originalPrompt}\n\nDetailed specification: ${prompt}\n\nPlease provide ONLY a complete HTML document starting with <!DOCTYPE html> and ending with </html>. Do not include ANY text before or after the HTML.`
       });
     } else {
       // Add the user's prompt to the chat history
       chatHistories[sessionId].push({
         role: "user",
-        content: prompt
+        content: `${prompt}\n\nPlease provide ONLY a complete HTML document starting with <!DOCTYPE html> and ending with </html>. Do not include ANY text before or after the HTML.`
       });
     }
     
@@ -137,7 +134,7 @@ app.post('/api/generate', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'o3-mini',
+        model: 'o4-mini',
         messages: chatHistories[sessionId],
         reasoning_effort: "medium",
         max_completion_tokens: 40000
@@ -155,7 +152,38 @@ app.post('/api/generate', async (req, res) => {
     
     // Remove markdown code block indicators if present
     generatedCode = generatedCode.replace(/^```html\s*/i, '');
+    generatedCode = generatedCode.replace(/^```\s*/i, '');
     generatedCode = generatedCode.replace(/\s*```$/i, '');
+    
+    // Extract only the HTML document
+    const doctypeMatch = generatedCode.match(/<!DOCTYPE html>[\s\S]*/i);
+    if (doctypeMatch) {
+      generatedCode = doctypeMatch[0];
+    }
+    
+    // If there's text after </html>, remove it
+    const htmlEndMatch = generatedCode.match(/([\s\S]*<\/html>)/i);
+    if (htmlEndMatch) {
+      generatedCode = htmlEndMatch[1];
+    }
+    
+    // Add validation to ensure we have a complete HTML document
+    if (!generatedCode.includes('<!DOCTYPE html>') || !generatedCode.includes('</html>')) {
+      // If not a complete document, wrap the response in a basic HTML structure
+      if (!generatedCode.includes('<!DOCTYPE html>') && !generatedCode.includes('<html')) {
+        generatedCode = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Page</title>
+</head>
+<body>
+    ${generatedCode}
+</body>
+</html>`;
+      }
+    }
     
     // Add the assistant's response to the chat history
     chatHistories[sessionId].push({
@@ -199,15 +227,21 @@ app.post('/api/modify', async (req, res) => {
       chatHistories[sessionId] = [
         {
           role: "system",
-          content: "You are an expert HTML/CSS/JavaScript developer specializing in precise, targeted modifications to web pages. Your task is to modify ONLY the specific parts of the code that need to be changed based on the user's request, while preserving everything else exactly as is.\n\n**IMPORTANT GUIDELINES:**\n\n1. **Make Minimal Changes:** Only modify what is explicitly requested. Do not rewrite or restructure unrelated parts of the code.\n\n2. **Preserve Structure:** Maintain the existing HTML structure, class names, IDs, and overall organization unless specifically asked to change them.\n\n3. **Maintain Styling:** Keep all existing CSS styles intact unless the modification request explicitly involves changing styles.\n\n4. **Respect JavaScript:** Do not modify JavaScript functionality unless specifically requested.\n\n5. **Be Efficient:** Process the request quickly and focus only on the requested changes.\n\n6. **Return Complete Code:** Always return the complete HTML document with your targeted changes applied.\n\n**IMPORTANT:** Only respond with the raw code without any explanation or markdown formatting. Do not include any commentary about what you changed."
+          content: "You are an expert HTML/CSS/JavaScript developer specializing in precise, targeted modifications to web pages. Your task is to modify ONLY the specific parts of the code that need to be changed based on the user's request, while preserving everything else exactly as is.\n\n**IMPORTANT GUIDELINES:**\n\n1. **Make Minimal Changes:** Only modify or add what is explicitly requested. Do not rewrite or restructure unrelated parts of the code.\n\n2. **Preserve Structure:** Maintain the existing HTML structure, class names, IDs, and overall organization unless specifically asked to change them.\n\n3. **Maintain Styling:** Keep all existing CSS styles intact unless the modification request explicitly involves changing styles.\n\n4. **Design Theme:** **MANDATORY REQUIREMENT:** The header background MUST be #00823C and MUST include \"MANN+HUMMEL\" text in white color (#FFFFFF) positioned on the left side of the header as a logo element. For other elements, use ONLY the following colors: #46AF28 (green), #FF7300 (orange), #C80F2D (red), and related shades. Do not use any other colors.\n\n5. **Typography:** **MANDATORY REQUIREMENT:** Set the font-family for the entire page to \"Gotham\", sans-serif.\n\n6. **Respect JavaScript:** Do not modify JavaScript functionality unless specifically requested.\n\n7. **Be Efficient:** Process the request quickly and focus only on the requested changes.\n\n8. **Return Complete Code:** Always and only return the complete HTML document with your targeted changes applied.\n\n**IMPORTANT:** Your entire response must be ONLY the raw HTML code without any explanation, markdown formatting, or comments to the user. Do not include ANY text before or after the HTML document."
         }
       ];
     }
     
-    // Add the current code and modification request to the chat history
+    // Add the current code to the chat history as an assistant message
+    chatHistories[sessionId].push({
+      role: "assistant",
+      content: currentCode
+    });
+    
+    // Add the user's modification request to the chat history
     chatHistories[sessionId].push({
       role: "user",
-      content: prompt
+      content: `I need you to make a SPECIFIC change to the above HTML code. Please modify ONLY what I'm asking for and keep everything else exactly the same.\n\nRequested change: ${prompt}\n\nRemember: Only change what's needed for this specific request. Don't rewrite or restructure other parts of the code. **RETURN ONLY THE COMPLETE HTML DOCUMENT** with your targeted changes applied, starting with <!DOCTYPE html> and ending with </html>.\n\n**IMPORTANT:** Your entire response must be ONLY the raw HTML code without any explanation, markdown formatting, or comments to the user. Do not include ANY text before or after the HTML document.`
     });
     
     // Call OpenAI API with both the code and prompt
@@ -218,22 +252,9 @@ app.post('/api/modify', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'o3-mini',
-        reasoning_effort: "low",
-        messages: [
-          // System message
-          chatHistories[sessionId][0],
-          // Add the current code as a separate message
-          {
-            role: "assistant",
-            content: currentCode
-          },
-          // Add the modification request with clear instructions
-          {
-            role: "user",
-            content: `I need you to make a SPECIFIC change to the above HTML code. Please modify ONLY what I'm asking for and keep everything else exactly the same.\n\nRequested change: ${prompt}\n\nRemember: Only change what's needed for this specific request. Don't rewrite or restructure other parts of the code.`
-          }
-        ],
+        model: 'o4-mini',
+        reasoning_effort: "medium",
+        messages: chatHistories[sessionId],
         max_completion_tokens: 30000
       })
     });
@@ -249,7 +270,42 @@ app.post('/api/modify', async (req, res) => {
     
     // Remove markdown code block indicators if present
     modifiedCode = modifiedCode.replace(/^```html\s*/i, '');
+    modifiedCode = modifiedCode.replace(/^```\s*/i, '');
     modifiedCode = modifiedCode.replace(/\s*```$/i, '');
+    
+    // Extract only the HTML document
+    const doctypeMatch = modifiedCode.match(/<!DOCTYPE html>[\s\S]*/i);
+    if (doctypeMatch) {
+      modifiedCode = doctypeMatch[0];
+    }
+    
+    // If there's text after </html>, remove it
+    const htmlEndMatch = modifiedCode.match(/([\s\S]*<\/html>)/i);
+    if (htmlEndMatch) {
+      modifiedCode = htmlEndMatch[1];
+    }
+    
+    // Add validation to ensure we have a complete HTML document
+    if (!modifiedCode.includes('<!DOCTYPE html>') || !modifiedCode.includes('</html>')) {
+      // If not a complete document, wrap the response in a basic HTML structure
+      if (!modifiedCode.includes('<!DOCTYPE html>') && !modifiedCode.includes('<html')) {
+        modifiedCode = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Page</title>
+</head>
+<body>
+    ${modifiedCode}
+</body>
+</html>`;
+      } else {
+        // If it has some HTML structure but not complete, use the current code as a fallback
+        console.error('Incomplete HTML returned from AI. Using original code as fallback.');
+        modifiedCode = currentCode;
+      }
+    }
     
     // Add the assistant's response to the chat history
     chatHistories[sessionId].push({
@@ -329,6 +385,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(5001, () => {
+  console.log(`Server running on port 5001`);
 }); 

@@ -45,5 +45,5 @@
   "devDependencies": {
     "@types/uuid": "^9.0.7"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5001"
 } 
