@@ -1,12 +1,27 @@
 /* Company Design System CSS */
 
 :root {
-  /* Color Variables */
-  --company-primary: #46af28;
-  --company-secondary: #E8C547;
-  --company-accent: #D64933;
-  --company-dark: #2F2F2F;
-  --company-light: #F5F5F5;
+  /* Color Variables - Mann+Hummel Brand Colors */
+  /* Primary Colors */
+  --company-green: #00823c; /* M+H green */
+  --company-light-green: #46af28; /* M+H light green */
+  --company-primary: var(--company-green); /* Main primary color */
+  --company-secondary: var(--company-light-green); /* Light green as secondary */
+  
+  /* Blacks */
+  --company-black-100: #000000; /* Black 100% */
+  --company-black-95: #212121; /* Black 95% */
+  --company-black-90: #333333; /* Black 90% */
+  --company-dark: var(--company-black-90); /* Default dark color */
+  
+  /* Secondary/Accent Colors */
+  --company-orange: #ff7300; /* M+H orange */
+  --company-red: #c80f2d; /* M+H red */
+  --company-accent: var(--company-red); /* Default accent color */
+  
+  /* Additional Colors */
+  --company-light: #F5F5F5; /* Light background */
+  --company-white: #FFFFFF; /* Pure white */
   
   /* Typography Scale */
   --font-size-h1: 32px;
@@ -29,50 +44,90 @@
 
 /* Font Face Declarations */
 @font-face {
-  font-family: 'Company-Sans';
-  src: url('/assets/company/fonts/CompanySans-Regular.woff2') format('woff2'),
-       url('/assets/company/fonts/CompanySans-Regular.woff') format('woff');
+  font-family: 'Gotham';
+  src: url('/assets/company/fonts/gotham/Gotham-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/assets/company/fonts/gotham/Gotham-Book.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Company-Sans';
-  src: url('/assets/company/fonts/CompanySans-Bold.woff2') format('woff2'),
-       url('/assets/company/fonts/CompanySans-Bold.woff') format('woff');
+  font-family: 'Gotham';
+  src: url('/assets/company/fonts/gotham/Gotham-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/assets/company/fonts/gotham/Gotham-Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Company-Serif';
-  src: url('/assets/company/fonts/CompanySerif-Regular.woff2') format('woff2'),
-       url('/assets/company/fonts/CompanySerif-Regular.woff') format('woff');
+  font-family: 'Gotham Narrow';
+  src: url('/assets/company/fonts/gotham/GothamNarrow-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Narrow';
+  src: url('/assets/company/fonts/gotham/GothamNarrow-Book.otf') format('opentype');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham Narrow';
+  src: url('/assets/company/fonts/gotham/GothamNarrow-Bold.otf') format('opentype');
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 /* Base Typography */
 body {
-  font-family: 'Company-Serif', Georgia, serif;
+  font-family: 'Gotham', Helvetica, Arial, sans-serif;
+  font-weight: normal;
   font-size: var(--font-size-body);
   line-height: 1.5;
-  color: var(--company-dark);
+  color: var(--company-black-90);
   background-color: var(--company-light);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Company-Sans', Arial, sans-serif;
+  font-family: 'Gotham', Helvetica, Arial, sans-serif;
+  font-weight: bold;
   margin-top: 0;
-  color: var(--company-primary);
+  color: var(--company-black-100);
 }
 
 h1 { font-size: var(--font-size-h1); margin-bottom: var(--spacing-lg); }
 h2 { font-size: var(--font-size-h2); margin-bottom: var(--spacing-md); }
 h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
+
+/* Provide classes for colored headings when needed */
+.company-heading-primary {
+  color: var(--company-primary);
+}
+
+.company-heading-secondary {
+  color: var(--company-secondary);
+}
 
 /* Common Components */
 
@@ -84,7 +139,8 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
   color: white;
   border: none;
   border-radius: var(--border-radius-sm);
-  font-family: 'Company-Sans', Arial, sans-serif;
+  font-family: 'Gotham', Helvetica, Arial, sans-serif;
+  font-weight: 500;
   font-size: var(--font-size-body);
   cursor: pointer;
   text-decoration: none;
@@ -117,10 +173,10 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
   display: block;
   width: 100%;
   padding: var(--spacing-sm);
-  font-family: 'Company-Serif', Georgia, serif;
+  font-family: 'Gotham', Helvetica, Arial, sans-serif;
   font-size: var(--font-size-body);
   line-height: 1.5;
-  color: var(--company-dark);
+  color: var(--company-black-90);
   background-color: white;
   border: 1px solid #ccc;
   border-radius: var(--border-radius-sm);
@@ -135,7 +191,7 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
 .company-label {
   display: block;
   margin-bottom: var(--spacing-sm);
-  font-family: 'Company-Sans', Arial, sans-serif;
+  font-family: 'Gotham', Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
 
@@ -150,7 +206,8 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
 
 /* Header */
 .company-header {
-  background-color: white;
+  background-color: var(--company-white);
+  border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: var(--spacing-md) var(--spacing-xl);
   display: flex;
@@ -160,6 +217,12 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
 
 .company-logo {
   height: 40px;
+  margin-right: var(--spacing-md);
+}
+
+.company-logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .company-nav {
@@ -168,9 +231,9 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
 }
 
 .company-nav-link {
-  color: var(--company-dark);
+  color: var(--company-black-90);
   text-decoration: none;
-  font-family: 'Company-Sans', Arial, sans-serif;
+  font-family: 'Gotham', Helvetica, Arial, sans-serif;
   transition: color 0.3s ease;
 }
 
@@ -180,7 +243,7 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
 
 /* Footer */
 .company-footer {
-  background-color: var(--company-dark);
+  background-color: var(--company-primary);
   color: white;
   padding: var(--spacing-xl) 0;
   margin-top: var(--spacing-xl);
@@ -200,6 +263,9 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
 .company-text-primary { color: var(--company-primary); }
 .company-text-secondary { color: var(--company-secondary); }
 .company-text-accent { color: var(--company-accent); }
+.company-text-dark { color: var(--company-black-90); }
+.company-text-light { color: var(--company-light); }
+.company-text-white { color: var(--company-white); }
 .company-bg-primary { background-color: var(--company-primary); }
 .company-bg-secondary { background-color: var(--company-secondary); }
 .company-bg-accent { background-color: var(--company-accent); }
@@ -219,4 +285,91 @@ h3 { font-size: var(--font-size-h3); margin-bottom: var(--spacing-md); }
     --font-size-h2: 22px;
     --font-size-h3: 18px;
   }
+}
+
+/* Company Images */
+.company-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: var(--spacing-md);
+}
+
+.company-image-hero {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.company-image-thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+  transition: transform 0.3s ease;
+}
+
+.company-image-thumbnail:hover {
+  transform: scale(1.03);
+}
+
+.company-image-rounded {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.company-image-feature {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: var(--border-radius-md);
+}
+
+.company-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Utility for narrow text */
+.company-text-narrow {
+  font-family: 'Gotham Narrow', Helvetica, Arial, sans-serif;
+}
+
+/* Utility for font weights */
+.company-font-light {
+  font-weight: 300;
+}
+
+.company-font-book {
+  font-weight: normal;
+}
+
+.company-font-medium {
+  font-weight: 500;
+}
+
+.company-font-bold {
+  font-weight: bold;
+}
+
+/* Section Backgrounds - Ensure no black backgrounds */
+.company-bg-light {
+  background-color: var(--company-light);
+}
+
+.company-bg-white {
+  background-color: var(--company-white);
+}
+
+/* Only use dark backgrounds sparingly */
+.company-bg-dark {
+  background-color: var(--company-black-95);
+  color: white;
 } 
